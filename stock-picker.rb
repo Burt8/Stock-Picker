@@ -1,4 +1,3 @@
-example_array = [20,17,29,9,10,21,25,22]
 def stock_picker(array)
   # pairs is multidimensional:
   # x-axis is the current price
@@ -12,13 +11,16 @@ def stock_picker(array)
     pairs[day].shift(day)
   end 
   most_profit = pairs.flatten.sort[-1]
-  buy_sell_days = pairs.filter_map do |pair_array|
+  buy_sell_days = []
+  i = 0
+  pairs.filter_map do |pair_array|
     if pair_array.include?(most_profit)
-      pair_array.index(most_profit)
+      buy_sell_days.push(i)
     end
+    i += 1
   end
   buy_sell_days.push(array.index(array[buy_sell_days[0]] + most_profit))
   p buy_sell_days
 end
 
-stock_picker(example_array)
+stock_picker([20,12,2,5,7,345,5,7,734,576])
